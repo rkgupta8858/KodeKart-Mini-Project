@@ -8,6 +8,17 @@ public class Products {
 	private int quantity;
 	private String description;
 
+	
+	public Products(int id, String name, String category, double price, int quantity, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.category = category;
+		this.price = price;
+		this.quantity = quantity;
+		this.description = description;
+	}
+
 	public int getId() {
 		return id;
 	}

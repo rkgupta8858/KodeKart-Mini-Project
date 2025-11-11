@@ -15,8 +15,9 @@ public class App {
 
 		while (!exit) {
 			System.out.println("1 : Register");
-			System.out.println("2 : Login");
-			System.out.println("3 : Exit");
+			System.out.println("2 : Login as User");
+			System.out.println("3 : Login as Admin");
+			System.out.println("4 : Exit");
 
 			System.out.print("Enter Selection : ");
 
@@ -30,6 +31,9 @@ public class App {
 				controller.login();
 				break;
 			case 3:
+				controller.adminLogin();
+				break;
+			case 4:
 				exit = true;
 				System.out.println("Exiting....");
 				break;

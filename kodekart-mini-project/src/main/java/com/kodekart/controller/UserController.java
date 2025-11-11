@@ -2,14 +2,18 @@ package com.kodekart.controller;
 
 import java.util.Scanner;
 
+import com.kodekart.admin.dashboard.AdminDashboard;
 import com.kodekart.model.Users;
+import com.kodekart.service.AdminService;
 import com.kodekart.service.UserService;
+import com.kodekart.service.impl.AdminServiceImpl;
 import com.kodekart.service.impl.UserServiceImpl;
 
 public class UserController {
 
 	private Scanner scanner = new Scanner(System.in);
 	private UserService userService = new UserServiceImpl();
+	private AdminService adminService = new AdminServiceImpl();
 
 	public void register() {
 		System.out.println("\n------User Registration------");
@@ -38,7 +42,7 @@ public class UserController {
 	}
 
 	public void login() {
-		System.out.println("\n---- Login ----");
+		System.out.println("\n---- User Login ----");
 
 		System.out.print("Enter Email: ");
 		String email = scanner.nextLine();
@@ -49,7 +53,29 @@ public class UserController {
 		Users u = userService.login(email, pass);
 
 		if (u != null) {
-			System.out.println("Login Successful!.. Welcome " + u.getName());
+			System.out.println("User Login Successful!.. Welcome " + u.getName());
+		} else {
+			System.err.println("Invalid Login Details...");
+		}
+
+	}
+
+	public void adminLogin() {
+		AdminDashboard adminDashboard = new AdminDashboard();
+
+		System.out.println("\n---- Admin Login ----");
+
+		System.out.print("Enter Email: ");
+		String email = scanner.nextLine();
+
+		System.out.print("Enter Password: ");
+		String pass = scanner.nextLine();
+
+		Users u = adminService.login(email, pass);
+
+		if (u != null) {
+			System.out.println("Admin Login Successful!.. Welcome " + u.getName());
+			adminDashboard.adminDash();
 		} else {
 			System.err.println("Invalid Login Details...");
 		}
