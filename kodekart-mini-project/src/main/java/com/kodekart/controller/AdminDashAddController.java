@@ -71,11 +71,11 @@ public class AdminDashAddController {
 
 //	 ************** Delete Product ***************
 	public void deleteProductByName() {
-		
+
 		System.out.println("\n------Admin Updating Page------");
 		System.out.print("Enter Product Name : ");
 		String name = scanner.nextLine();
-		
+
 		boolean deleted = productService.deleteProductByName(name);
 		if (deleted) {
 			System.out.println("Product Deleted Successfully...!");
@@ -83,19 +83,26 @@ public class AdminDashAddController {
 			System.out.println("Delete Failed! Product Not Found...");
 		}
 	}
-	
-//	 ************** Delete Product ***************
-	public void getAllProduct() {
-		 List<Products> products = productService.getAllProduct();
 
-		    for (Products p : products) {
-		        System.out.println("Id : "+p.getId() + "| Name :  " + p.getName() + "| Category : "+p.getCategory()+"| Price : " + p.getPrice()+"| Quantity : "+p.getQuantity()+"| Description : "+p.getDescription());
-		    }
+//	 ************** Show All Product ***************
+	public void getAllProduct() {
+
+		List<Products> products = productService.getAllProduct();
+		/*
+		 * for (Products p : products) { System.out.println("Id : " + p.getId() +
+		 * "| Name :  " + p.getName() + "| Category : " + p.getCategory() + "| Price : "
+		 * + p.getPrice() + "| Quantity : " + p.getQuantity() + "| Description : " +
+		 * p.getDescription()); }
+		 */
+
+		System.out.println("\n---------------------------------------------------------------------------------------------");
+		System.out.printf("%-5s %-15s %-15s %-10s %-10s %-20s%n", "ID", "NAME", "CATEGORY", "PRICE", "QTY","DESCRIPTION");
+		System.out.println("---------------------------------------------------------------------------------------------");
+
+		for (Products p : products) {
+			System.out.printf("%-5d %-15s %-15s %-10.2f %-10d %-20s%n", p.getId(), p.getName(), p.getCategory(),p.getPrice(), p.getQuantity(), p.getDescription());
+		}
+
+		System.out.println("---------------------------------------------------------------------------------------------");
 	}
 }
-
-
-
-
-
-

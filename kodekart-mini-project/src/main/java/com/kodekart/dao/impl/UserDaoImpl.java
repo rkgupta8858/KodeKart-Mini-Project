@@ -19,6 +19,7 @@ public class UserDaoImpl implements UserDao {
 	String sql;
 
 	Connection connection;
+	PreparedStatement preparedStatement;
 
 	@Override
 	public boolean register(Users users) {
@@ -26,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 			Class.forName(driver);
 			sql = "insert into users(name,email,phone,password) values(?,?,?,?)";
 			connection = DriverManager.getConnection(url, userName, userPass);
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, users.getName());
 			preparedStatement.setString(2, users.getEmail());
 			preparedStatement.setString(3, users.getPhone());
@@ -50,15 +51,15 @@ public class UserDaoImpl implements UserDao {
 			Class.forName(driver);
 			sql = "select * from users where email=? and password =?";
 			connection = DriverManager.getConnection(url, userName, userPass);
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, email);
 			preparedStatement.setString(2, password);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.next()) {
-				return new Users(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("phone"),rs.getString("password"));
+				return new Users(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("phone"),
+						rs.getString("password"));
 			}
-			
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

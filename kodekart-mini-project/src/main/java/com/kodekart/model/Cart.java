@@ -6,6 +6,14 @@ public class Cart {
 	private int productId;
 	private int quantity;
 
+	public Cart(int id, int userId, int productId, int quantity) {
+		super();
+		this.id = id;
+		this.userId = userId;
+		this.productId = productId;
+		this.quantity = quantity;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -37,4 +45,10 @@ public class Cart {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	@Override
+	public String toString() {
+		return "Cart [id=" + id + ", userId=" + userId + ", productId=" + productId + ", quantity=" + quantity + "]";
+	}
+	
 }

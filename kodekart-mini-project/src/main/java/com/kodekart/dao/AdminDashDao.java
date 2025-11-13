@@ -8,10 +8,14 @@ public interface AdminDashDao {
 
 	boolean addProduct(Products products);
 
-	boolean updateProductByQuantity(String name,int quantity);
+	boolean updateProductByQuantity(String name, int quantity);
 
 	boolean deleteProductByName(String name);
 
-	List<Products>  getAllProduct();
+	List<Products> getAllProduct();
+
+	Products getProductById(int productId);
+
+	boolean updateQuantity(int productId, int newQuantity);
 
 }

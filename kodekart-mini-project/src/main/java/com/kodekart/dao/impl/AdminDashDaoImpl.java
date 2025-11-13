@@ -116,4 +116,48 @@ public class AdminDashDaoImpl implements AdminDashDao {
 
 	}
 
+	@Override
+	public Products getProductById(int id) {
+
+		sql = "SELECT * FROM products WHERE id=?";
+
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, userName, userPass);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, id);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				return new Products(rs.getInt("id"), rs.getString("name"), rs.getString("category"),
+						rs.getDouble("price"), rs.getInt("quantity"), rs.getString("description"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	@Override
+	public boolean updateQuantity(int productId, int newQuantity) {
+		String sql = "UPDATE products SET quantity=? WHERE id=?";
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, userName, userPass);
+			preparedStatement = connection.prepareStatement(sql);
+
+			preparedStatement.setInt(1, newQuantity);
+			preparedStatement.setInt(2, productId);
+
+			return preparedStatement.executeUpdate() > 0;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 }
