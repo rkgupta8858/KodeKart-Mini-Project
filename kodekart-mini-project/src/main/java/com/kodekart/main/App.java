@@ -6,7 +6,7 @@ import com.kodekart.controller.UserController;
 
 public class App {
 	public static void main(String[] args) {
-		System.out.println("********--> Welcome to MINALkart <--********");
+		System.out.println("********--> Welcome to Kodekart <--********");
 		UserController controller = new UserController();
 
 		Scanner scanner = new Scanner(System.in);

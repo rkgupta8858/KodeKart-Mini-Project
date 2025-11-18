@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class CartDaoImpl implements CartDao {
 
 			return preparedStatement.executeUpdate() > 0;
 
+		} catch (SQLIntegrityConstraintViolationException e) {
+			System.err.println("Failed to add....");
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}

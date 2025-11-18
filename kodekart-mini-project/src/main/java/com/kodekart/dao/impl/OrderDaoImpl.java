@@ -6,8 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.kodekart.dao.OrderDao;
+import com.kodekart.model.Orders;
 
 public class OrderDaoImpl implements OrderDao {
 
@@ -47,4 +50,30 @@ public class OrderDaoImpl implements OrderDao {
 		}
 		return -1;
 	}
+
+	@Override
+	public List<Orders> getOrdersByUserId(int userId) {
+
+		List<Orders> list = new ArrayList<>();
+		String sql = "SELECT * FROM orders WHERE user_id=? ORDER BY order_date DESC";
+
+		try (Connection conn = DriverManager.getConnection(url, userName, userPass);
+				PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			ps.setInt(1, userId);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Orders o = new Orders(rs.getInt("id"), rs.getInt("user_id"), rs.getTimestamp("order_date"),
+						rs.getDouble("total_amount"));
+				list.add(o);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 }

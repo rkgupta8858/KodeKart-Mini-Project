@@ -8,6 +8,14 @@ public class Orders {
 	private Timestamp orderdate;
 	private double totalAmount;
 
+	public Orders(int id, int userIid, Timestamp orderdate, double totalAmount) {
+		super();
+		this.id = id;
+		this.userIid = userIid;
+		this.orderdate = orderdate;
+		this.totalAmount = totalAmount;
+	}
+
 	public int getId() {
 		return id;
 	}
